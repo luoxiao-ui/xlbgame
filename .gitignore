@@ -1,4 +1,11 @@
 .codex/
 .vscode/
+.idea/
 item-value-app/.idea/
+**/.idea/
 item-value-app/.gradle/
+**/.gradle/
+build/
+**/build/
+local.properties
+**/local.properties

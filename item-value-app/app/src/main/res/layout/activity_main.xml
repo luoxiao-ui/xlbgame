@@ -43,12 +43,13 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginRight="14dp"
-                    android:text="🔔"
-                    android:textSize="18sp" />
+                    android:contentDescription="通知"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_bell" />
 
                 <TextView
                     android:layout_width="wrap_content"
