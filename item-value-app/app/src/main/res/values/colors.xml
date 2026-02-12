@@ -1,0 +1,9 @@
+<resources>
+    <color name="brand_primary">#84CC16</color>
+    <color name="brand_primary_dark">#365314</color>
+    <color name="brand_secondary">#A3E635</color>
+    <color name="text_primary">#101114</color>
+    <color name="text_muted">#6B7280</color>
+    <color name="bg_app">#ECECEC</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

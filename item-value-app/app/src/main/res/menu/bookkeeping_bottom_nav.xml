@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="记一笔" />
+    <item
+        android:id="@+id/nav_target"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="目标" />
+    <item
+        android:id="@+id/nav_records"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="账单" />
+</menu>

@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">starMoon</string>
+    <string name="invalid_input">请输入正确的价格和日期（格式 YYYY-MM-DD）</string>
+
+    <string name="home_title">starMoon 财务助手</string>
+    <string name="home_subtitle">选择你的模式：阅读时光 / 智能记账 / 有数估值</string>
+    <string name="home_bookkeeping_title">记账 + 攒钱目标</string>
+    <string name="home_bookkeeping_desc">记录收支，输出每日净额，并预测距离攒钱目标还需多久。</string>
+    <string name="home_bookkeeping_enter">进入记账</string>
+
+    <string name="youshu_title">有数估值</string>
+    <string name="youshu_subtitle">输入信息后给出区间估值和成交建议</string>
+    <string name="youshu_params">估值参数</string>
+    <string name="youshu_result">估值结果</string>
+    <string name="youshu_calculate">计算估值</string>
+
+    <string name="bookkeeping_title">记账</string>
+    <string name="bookkeeping_subtitle">每日输出 + 目标攒钱预计达成时间</string>
+    <string name="bookkeeping_type">类型</string>
+    <string name="bookkeeping_category">分类</string>
+    <string name="bookkeeping_amount">金额 (元)</string>
+    <string name="bookkeeping_note">备注</string>
+    <string name="bookkeeping_add">添加账目</string>
+    <string name="bookkeeping_summary">统计</string>
+    <string name="bookkeeping_records">账目列表</string>
+    <string name="bookkeeping_category_hint">例如：餐饮、工资、交通</string>
+    <string name="bookkeeping_amount_hint">例如：35.5</string>
+    <string name="bookkeeping_note_hint">可选</string>
+    <string name="bookkeeping_empty_records">暂无账目</string>
+    <string name="bookkeeping_invalid_input">请输入正确金额、分类和日期（YYYY-MM-DD）</string>
+    <string name="target_invalid">请输入正确目标金额</string>
+
+    <string name="reading_invalid_input">请至少填写书名，并确保日期格式为 YYYY-MM-DD</string>
+    <string name="reading_empty_history">暂无阅读记录</string>
+
+    <string-array name="reading_status">
+        <item>在读</item>
+        <item>已读</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>手机</item>
+        <item>笔记本</item>
+        <item>平板</item>
+        <item>相机</item>
+        <item>游戏机</item>
+        <item>其他电子产品</item>
+    </string-array>
+
+    <string-array name="conditions">
+        <item>99新（近乎全新）</item>
+        <item>95新（轻微使用痕迹）</item>
+        <item>9成新（明显痕迹）</item>
+        <item>8成新及以下</item>
+    </string-array>
+
+    <string-array name="accessories">
+        <item>全套齐全</item>
+        <item>缺少少量配件</item>
+        <item>仅主机</item>
+    </string-array>
+
+    <string-array name="repairs">
+        <item>无维修</item>
+        <item>官方维修</item>
+        <item>第三方维修</item>
+    </string-array>
+
+    <string-array name="trends">
+        <item>下行</item>
+        <item>平稳</item>
+        <item>上行</item>
+    </string-array>
+
+    <string-array name="ledger_types">
+        <item>支出</item>
+        <item>收入</item>
+    </string-array>
+</resources>

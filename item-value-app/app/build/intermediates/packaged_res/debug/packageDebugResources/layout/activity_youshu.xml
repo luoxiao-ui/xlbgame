@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_hero"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youshu_title"
+                android:textColor="#F4F8FF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/youshu_subtitle"
+                android:textColor="#CCFBF1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youshu_params"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView style="@style/FormLabel" android:text="品类" />
+            <Spinner android:id="@+id/categorySpinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" />
+
+            <TextView style="@style/FormLabel" android:text="原始购入价 (元)" />
+            <EditText android:id="@+id/originalPriceInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" android:inputType="number" />
+
+            <TextView style="@style/FormLabel" android:text="购买日期 (YYYY-MM-DD)" />
+            <EditText android:id="@+id/purchaseDateInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" android:inputType="date" />
+
+            <TextView style="@style/FormLabel" android:text="成色" />
+            <Spinner android:id="@+id/conditionSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" />
+
+            <TextView style="@style/FormLabel" android:text="配件完整度" />
+            <Spinner android:id="@+id/accessoriesSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" />
+
+            <TextView style="@style/FormLabel" android:text="维修史" />
+            <Spinner android:id="@+id/repairSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="市场热度" android:textColor="@color/text_primary" />
+                <TextView android:id="@+id/demandValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip" android:paddingLeft="10dp" android:paddingTop="4dp" android:paddingRight="10dp" android:paddingBottom="4dp" android:text="6" android:textColor="@color/brand_primary" android:textStyle="bold" />
+            </LinearLayout>
+            <SeekBar android:id="@+id/demandSeekBar" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="稀缺度" android:textColor="@color/text_primary" />
+                <TextView android:id="@+id/rarityValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_chip" android:paddingLeft="10dp" android:paddingTop="4dp" android:paddingRight="10dp" android:paddingBottom="4dp" android:text="5" android:textColor="@color/brand_primary" android:textStyle="bold" />
+            </LinearLayout>
+            <SeekBar android:id="@+id/raritySeekBar" android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+            <TextView style="@style/FormLabel" android:text="当月市场趋势" />
+            <Spinner android:id="@+id/trendSpinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_input" />
+
+            <Button
+                android:id="@+id/calculateButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_button_primary"
+                android:text="@string/youshu_calculate"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/youshu_result" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" />
+
+            <TextView style="@style/FormLabel" android:text="建议成交价区间" />
+            <TextView android:id="@+id/dealRangeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="@color/brand_primary" android:textSize="25sp" android:textStyle="bold" />
+
+            <TextView style="@style/FormLabel" android:text="建议回收价区间" />
+            <TextView android:id="@+id/recycleRangeText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" android:textColor="#0A8A61" android:textSize="22sp" android:textStyle="bold" />
+
+            <TextView style="@style/FormLabel" android:text="基准估值" />
+            <TextView android:id="@+id/baseValueText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" />
+
+            <TextView style="@style/FormLabel" android:text="可信度" />
+            <TextView android:id="@+id/confidenceText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" />
+
+            <TextView style="@style/FormLabel" android:text="流动性指数" />
+            <TextView android:id="@+id/liquidityText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--" />
+
+            <TextView style="@style/FormLabel" android:text="建议" />
+            <TextView android:id="@+id/recommendationText" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="--" android:textColor="@color/text_primary" />
+
+            <TextView style="@style/FormLabel" android:text="影响因素" />
+            <TextView android:id="@+id/factorsText" android:layout_width="match_parent" android:layout_height="wrap_content" android:lineSpacingExtra="3dp" android:text="--" android:textColor="@color/text_muted" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
