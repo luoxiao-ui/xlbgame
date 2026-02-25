@@ -1,8 +1,37 @@
-.DS_Store
-/.build
-/Packages
-xcuserdata/
+# Swift
+.build/
+*.xcodeproj
+*.xcworkspace
+*.xcuserdata
+*.xcuserstate
 DerivedData/
-.swiftpm/configuration/registries.json
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
-.netrc
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Xcode
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+Packages/
+Package.resolved
+*.xcodeproj
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+*.o
+*.swiftdoc
+*.swiftmodule
