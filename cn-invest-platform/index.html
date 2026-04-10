@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星盘投资 - A股与基金一体化平台原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar reveal" style="--delay: 0.02s">
+        <div>
+          <p class="eyebrow">实盘前训练场</p>
+          <h1>星盘投资</h1>
+        </div>
+        <div class="topbar-meta">
+          <p id="market-time">交易日 09:30-15:00</p>
+          <span id="risk-badge" class="risk-badge">风险等级：稳健型</span>
+        </div>
+      </header>
+
+      <nav class="main-nav reveal" style="--delay: 0.08s">
+        <button class="nav-btn active" data-target="market-section">行情</button>
+        <button class="nav-btn" data-target="watchlist-section">自选</button>
+        <button class="nav-btn" data-target="fund-section">基金</button>
+        <button class="nav-btn" data-target="portfolio-section">持仓</button>
+        <button class="nav-btn" data-target="academy-section">学堂</button>
+      </nav>
+
+      <main class="layout">
+        <section class="column column-wide">
+          <article id="market-section" class="card reveal" style="--delay: 0.12s">
+            <div class="card-head split">
+              <div>
+                <h2>今日大盘</h2>
+                <p class="muted">支持接入实时行情，失败时自动回退演示数据</p>
+              </div>
+              <button id="refresh-live" type="button" class="mini-btn">刷新实时</button>
+            </div>
+            <div id="market-grid" class="market-grid"></div>
+            <div class="market-bottom">
+              <div class="heat-map">
+                <h3>行业热度</h3>
+                <div id="sector-bars" class="sector-bars"></div>
+              </div>
+              <div class="insight">
+                <h3>盘中洞察</h3>
+                <p id="market-insight"></p>
+              </div>
+            </div>
+          </article>
+
+          <article id="watchlist-section" class="card reveal" style="--delay: 0.16s">
+            <div class="card-head split">
+              <div>
+                <h2>自选股票</h2>
+                <p class="muted">融合东方财富/同花顺常见看盘信息密度</p>
+              </div>
+              <label class="search-wrap">
+                <input id="stock-search" type="search" placeholder="搜代码或名称，例如 600519 / 贵州茅台" />
+              </label>
+            </div>
+            <div class="table-wrap">
+              <table class="watchlist-table">
+                <thead>
+                  <tr>
+                    <th>代码</th>
+                    <th>名称</th>
+                    <th>最新</th>
+                    <th>涨跌幅</th>
+                    <th>换手率</th>
+                    <th>市盈率</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="watchlist-body"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article id="fund-section" class="card reveal" style="--delay: 0.2s">
+            <div class="card-head split">
+              <div>
+                <h2>基金中心</h2>
+                <p class="muted">参考天天基金的筛选与定投入口习惯</p>
+              </div>
+              <div class="chips" id="fund-filters"></div>
+            </div>
+            <div id="fund-list" class="fund-list"></div>
+          </article>
+
+          <article id="news-section" class="card reveal" style="--delay: 0.24s">
+            <div class="card-head">
+              <h2>资讯雷达</h2>
+              <p class="muted">模拟聚合公告、研报与政策快讯</p>
+            </div>
+            <div id="news-list" class="news-list"></div>
+          </article>
+        </section>
+
+        <section class="column column-side">
+          <article id="portfolio-section" class="card reveal" style="--delay: 0.12s">
+            <div class="card-head">
+              <h2>资产总览</h2>
+              <p class="muted">模拟账户，用于练习交易决策</p>
+            </div>
+            <div class="asset-total">
+              <p class="label">总资产</p>
+              <p id="total-asset" class="number"></p>
+              <div class="asset-meta">
+                <span id="total-pnl"></span>
+                <span id="cash-balance"></span>
+              </div>
+            </div>
+            <div class="allocation">
+              <h3>仓位分布</h3>
+              <div id="allocation-bars" class="allocation-bars"></div>
+            </div>
+            <div class="positions">
+              <h3>持仓明细</h3>
+              <div id="position-list" class="position-list"></div>
+            </div>
+          </article>
+
+          <article id="risk-check-section" class="card reveal" style="--delay: 0.14s">
+            <div class="card-head split">
+              <div>
+                <h2>风险体检</h2>
+                <p class="muted">识别仓位集中、现金不足、波动暴露等问题</p>
+              </div>
+              <label class="inline-select">
+                <span>风格</span>
+                <select id="risk-profile">
+                  <option value="conservative">保守</option>
+                  <option value="balanced" selected>平衡</option>
+                  <option value="aggressive">进取</option>
+                </select>
+              </label>
+            </div>
+            <div id="risk-items" class="risk-items"></div>
+            <div class="plan-wrap">
+              <div class="split-row">
+                <h3>调仓建议</h3>
+                <button id="rebalance-btn" type="button" class="mini-btn">重新计算</button>
+              </div>
+              <div id="rebalance-result" class="rebalance-result"></div>
+            </div>
+          </article>
+
+          <article id="trade-section" class="card reveal" style="--delay: 0.16s">
+            <div class="card-head">
+              <h2>模拟交易</h2>
+              <p class="muted">先用虚拟资金练手，不构成投资建议</p>
+            </div>
+            <form id="trade-form" class="trade-form">
+              <label>
+                标的
+                <select id="trade-symbol"></select>
+              </label>
+              <label>
+                数量（股票按股，基金按份）
+                <input id="trade-qty" type="number" min="1" step="1" value="100" />
+              </label>
+              <p id="trade-price" class="trade-price"></p>
+              <div class="trade-actions">
+                <button type="button" id="buy-btn" class="action-btn buy">买入</button>
+                <button type="button" id="sell-btn" class="action-btn sell">卖出</button>
+              </div>
+            </form>
+            <div class="tx-log">
+              <h3>最近交易</h3>
+              <ul id="tx-list"></ul>
+            </div>
+          </article>
+
+          <article id="alert-section" class="card reveal" style="--delay: 0.18s">
+            <div class="card-head">
+              <h2>价格预警</h2>
+              <p class="muted">触发后会弹提醒，帮你执行止盈止损纪律</p>
+            </div>
+            <form id="alert-form" class="alert-form">
+              <label>
+                标的
+                <select id="alert-symbol"></select>
+              </label>
+              <label>
+                条件
+                <select id="alert-direction">
+                  <option value="above">价格上破</option>
+                  <option value="below">价格下破</option>
+                </select>
+              </label>
+              <label>
+                目标价
+                <input id="alert-price" type="number" min="0.0001" step="0.0001" placeholder="例如 1600 或 1.2500" />
+              </label>
+              <button id="add-alert-btn" type="submit" class="mini-btn">添加预警</button>
+            </form>
+            <div class="plan-wrap">
+              <h3>预警列表</h3>
+              <ul id="alert-list" class="alert-list"></ul>
+            </div>
+            <div class="plan-wrap">
+              <h3>触发记录</h3>
+              <ul id="alert-triggered-list" class="alert-triggered-list"></ul>
+            </div>
+          </article>
+
+          <article id="sip-section" class="card reveal" style="--delay: 0.2s">
+            <div class="card-head">
+              <h2>定投计算器</h2>
+              <p class="muted">模拟长期计划，帮助你建立纪律投资</p>
+            </div>
+            <form id="sip-form" class="sip-form">
+              <label>
+                每月金额（元）
+                <input id="sip-monthly" type="number" min="100" step="100" value="2000" />
+              </label>
+              <label>
+                投资年限
+                <input id="sip-years" type="number" min="1" max="30" step="1" value="10" />
+              </label>
+              <label>
+                预期年化收益（%）
+                <input id="sip-rate" type="number" min="1" max="30" step="0.1" value="8" />
+              </label>
+            </form>
+            <div id="sip-result" class="sip-result"></div>
+            <div class="plan-wrap">
+              <h3>我的定投计划</h3>
+              <ul id="sip-plan-list" class="sip-plan-list"></ul>
+            </div>
+          </article>
+
+          <article id="academy-section" class="card reveal" style="--delay: 0.24s">
+            <div class="card-head">
+              <h2>新手学堂</h2>
+              <p class="muted">从零开始认识股票、基金、风险控制</p>
+            </div>
+            <div id="academy-list" class="academy-list"></div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="risk-note reveal" style="--delay: 0.3s">
+        <p>
+          风险提示：市场有风险，投资需谨慎。以上行情、持仓、收益均为演示数据，不能作为任何投资依据。
+        </p>
+      </footer>
+
+      <nav class="mobile-nav">
+        <button class="mobile-btn active" data-target="market-section">行情</button>
+        <button class="mobile-btn" data-target="watchlist-section">自选</button>
+        <button class="mobile-btn" data-target="fund-section">基金</button>
+        <button class="mobile-btn" data-target="trade-section">交易</button>
+        <button class="mobile-btn" data-target="academy-section">学堂</button>
+      </nav>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

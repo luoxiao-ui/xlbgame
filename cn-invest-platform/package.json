@@ -1,0 +1,9 @@
+{
+  "name": "cn-invest-platform",
+  "version": "1.1.0",
+  "private": true,
+  "description": "A-share and fund platform prototype with real-time quote proxy",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
