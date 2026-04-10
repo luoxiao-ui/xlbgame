@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 380px;
+  background: linear-gradient(180deg, #f7f1e7 0%, #efe3d0 100%);
+  color: #1f1b16;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.popup-shell {
+  padding: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.tip,
+.status {
+  color: #6e6457;
+  line-height: 1.6;
+}
+
+.tip {
+  margin: 10px 0 12px;
+}
+
+textarea,
+.preview {
+  width: 100%;
+  border: 1px solid rgba(73, 58, 39, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px 14px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+button {
+  flex: 1;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 14px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary {
+  color: #fff;
+  background: linear-gradient(135deg, #a34212, #7f2d0c);
+}
+
+.ghost {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(73, 58, 39, 0.12);
+}
+
+.status {
+  margin-top: 12px;
+}
+
+.preview {
+  min-height: 160px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

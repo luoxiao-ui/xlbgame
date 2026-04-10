@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/master.swiftdeps"
+  },
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Sources/GitVisualMac/main.swift": {
+    "dependencies": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.d",
+    "object": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swift.o",
+    "swiftmodule": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swiftdeps",
+    "diagnostics": "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.dia"
+  }
+}

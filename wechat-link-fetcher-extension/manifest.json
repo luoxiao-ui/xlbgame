@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Wechat Link Fetcher",
+  "version": "0.1.0",
+  "description": "批量打开公众号链接并提取文章标题与正文。",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "downloads",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://mp.weixin.qq.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Wechat Link Fetcher",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mp.weixin.qq.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

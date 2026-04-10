@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wechat Link Fetcher</title>
+  <link rel="stylesheet" href="./popup.css" />
+</head>
+<body>
+  <main class="popup-shell">
+    <h1>链接批量提取</h1>
+    <p class="tip">
+      一行一个公众号链接。插件会在后台打开文章页，读取正文并生成 JSON。
+    </p>
+
+    <textarea
+      id="linksInput"
+      placeholder="https://mp.weixin.qq.com/s/xxx&#10;https://mp.weixin.qq.com/s/yyy"
+    ></textarea>
+
+    <div class="actions">
+      <button id="extractButton" class="primary">开始提取</button>
+      <button id="downloadButton" class="ghost">下载上次结果</button>
+    </div>
+
+    <div id="statusBox" class="status">等待输入链接。</div>
+    <pre id="previewBox" class="preview">提取结果预览会显示在这里。</pre>
+  </main>
+
+  <script src="./popup.js"></script>
+</body>
+</html>

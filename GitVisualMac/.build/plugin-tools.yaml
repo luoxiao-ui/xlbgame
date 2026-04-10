@@ -1,0 +1,81 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "GitVisualMac-arm64-apple-macosx26.0-debug.exe": ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe>"]
+  "GitVisualMac-arm64-apple-macosx26.0-debug.module": ["<GitVisualMac-arm64-apple-macosx26.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe>","<GitVisualMac-arm64-apple-macosx26.0-debug.module>"]
+  "test": ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe>","<GitVisualMac-arm64-apple-macosx26.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Sources/GitVisualMac/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac":
+    is-mutated: true
+commands:
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac-entitlement.plist":
+    tool: write-auxiliary-file
+    inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac-entitlement.plist"]
+    description: "Write auxiliary file /Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac-entitlement.plist"
+
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Sources/GitVisualMac/main.swift"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/sources"]
+    description: "Write auxiliary file /Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/sources"
+
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swift.o"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.product/Objects.LinkFileList"
+
+  "/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<GitVisualMac-arm64-apple-macosx26.0-debug.exe>":
+    tool: phony
+    inputs: ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe-CodeSigning>"]
+    outputs: ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe>"]
+
+  "<GitVisualMac-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swift.o","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/Modules/GitVisualMac.swiftmodule"]
+    outputs: ["<GitVisualMac-arm64-apple-macosx26.0-debug.module>"]
+
+  "C.GitVisualMac-arm64-apple-macosx26.0-debug.exe":
+    tool: shell
+    inputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swift.o","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.product/Objects.LinkFileList"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/GitVisualMac"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug","-o","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac","-module-name","GitVisualMac","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_GitVisualMac_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx13.0","-Xlinker","-add_ast_path","-Xlinker","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/Modules/GitVisualMac.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.GitVisualMac-arm64-apple-macosx26.0-debug.exe-entitlements":
+    tool: shell
+    inputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac-entitlement.plist"]
+    outputs: ["<GitVisualMac-arm64-apple-macosx26.0-debug.exe-CodeSigning>"]
+    description: "Applying debug entitlements to ./.build/arm64-apple-macosx/debug/GitVisualMac"
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac-entitlement.plist","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac"]
+
+  "C.GitVisualMac-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Sources/GitVisualMac/main.swift","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/sources"]
+    outputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/main.swift.o","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/Modules/GitVisualMac.swiftmodule"]
+    description: "Compiling Swift Module 'GitVisualMac' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","GitVisualMac","-emit-dependencies","-emit-module","-emit-module-path","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/Modules/GitVisualMac.swiftmodule","-output-file-map","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/output-file-map.json","-incremental","-c","@/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/GitVisualMac.build/sources","-I","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx13.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","GitVisualMac_main","-color-diagnostics","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","gitvisualmac"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Sources/GitVisualMac/","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Package.swift","/Users/zs/WebstormProjects/xlbgame/GitVisualMac/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

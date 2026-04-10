@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公众号文章打标台</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<div class="page-shell">
+    <header class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">WeChat Article Tagger</p>
+            <h1>公众号文章打标台</h1>
+            <p class="hero-text">
+                这个原型不直接破解微信认证，而是把流程改造成“你打开文章，我来接收正文并自动打标”。
+                现在支持手动粘贴正文、从公众号页面提取全文、配套插件按链接批量抓取、批量打标和结果导出。
+            </p>
+        </div>
+        <div class="hero-card">
+            <div class="metric">
+                <span class="metric-label">适合场景</span>
+                <strong>专业文章批量归类</strong>
+            </div>
+            <div class="metric">
+                <span class="metric-label">当前模式</span>
+                <strong>本地规则引擎</strong>
+            </div>
+            <div class="metric">
+                <span class="metric-label">后续可扩展</span>
+                <strong>接入大模型复核</strong>
+            </div>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="panel">
+            <div class="panel-head">
+                <h2>1. 标签体系</h2>
+                <button id="loadDemoTagsButton" class="ghost-button">载入示例标签</button>
+            </div>
+            <p class="panel-tip">
+                每行一个标签，格式：<code>标签名|关键词1,关键词2|排除词1,排除词2|命中阈值</code>
+            </p>
+            <textarea
+                id="tagRulesInput"
+                class="code-input"
+                spellcheck="false"
+                placeholder="例如：&#10;AI应用|大模型,提示词,智能体,AI Agent|招聘,房产|2&#10;金融投研|估值,财报,现金流,roe,回购|基金销售|2"
+            ></textarea>
+            <div id="tagRulePreview" class="chip-wrap"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head">
+                <h2>2. 公众号正文导入</h2>
+                <button id="loadDemoArticlesButton" class="ghost-button">载入示例文章</button>
+            </div>
+            <div class="import-grid">
+                <div class="soft-card">
+                    <h3>方式 A：手动粘贴</h3>
+                    <input id="manualTitleInput" class="text-input" type="text" placeholder="文章标题" />
+                    <input id="manualUrlInput" class="text-input" type="text" placeholder="文章链接（可选）" />
+                    <textarea
+                        id="manualContentInput"
+                        class="article-input"
+                        placeholder="把公众号全文粘贴到这里"
+                    ></textarea>
+                    <button id="addManualArticleButton" class="primary-button">加入待打标列表</button>
+                </div>
+
+                <div class="soft-card">
+                    <h3>方式 B：页面提取后粘贴 JSON</h3>
+                    <p class="panel-tip">
+                        在浏览器打开公众号文章后，运行下方书签脚本或控制台脚本，复制结果 JSON，再粘贴到这里。
+                    </p>
+                    <textarea
+                        id="batchImportInput"
+                        class="article-input"
+                        spellcheck="false"
+                        placeholder='支持单篇或数组，例如：[{"title":"...","url":"...","content":"..."}]'
+                    ></textarea>
+                    <div class="button-row">
+                        <button id="importJsonButton" class="primary-button">导入 JSON</button>
+                        <button id="copyExtractorButton" class="ghost-button">复制提取脚本</button>
+                    </div>
+                </div>
+            </div>
+            <div class="soft-card plugin-card">
+                <h3>方式 C：只贴链接，用配套插件批量抓正文</h3>
+                <p class="panel-tip">
+                    如果你不想每篇文章都执行脚本，可以加载目录 <code>wechat-link-fetcher-extension</code> 作为 Chrome 插件。
+                    把一批公众号链接贴进去，插件会后台逐篇打开文章并生成 JSON，随后再导入本页。
+                </p>
+            </div>
+            <details class="details-box">
+                <summary>查看公众号页面提取脚本</summary>
+                <pre id="extractorScriptBox" class="script-box"></pre>
+            </details>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head">
+                <h2>3. 待处理文章</h2>
+                <div class="button-row">
+                    <button id="runTaggingButton" class="primary-button">开始自动打标</button>
+                    <button id="clearArticlesButton" class="ghost-button">清空文章</button>
+                </div>
+            </div>
+            <div id="queueSummary" class="summary-bar">当前还没有文章。</div>
+            <div id="articleQueue" class="stack-list empty-state">
+                加入文章后，会在这里显示标题、来源和内容预览。
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head">
+                <h2>4. 打标结果</h2>
+                <div class="button-row">
+                    <button id="exportJsonButton" class="ghost-button">导出 JSON</button>
+                    <button id="exportCsvButton" class="ghost-button">导出 CSV</button>
+                </div>
+            </div>
+            <div id="resultSummary" class="summary-bar">还没有生成结果。</div>
+            <div id="resultList" class="stack-list empty-state">
+                点击“开始自动打标”后，这里会显示每篇文章的摘要、命中标签和依据。
+            </div>
+        </section>
+    </main>
+</div>
+
+<template id="articleCardTemplate">
+    <article class="card">
+        <div class="card-head">
+            <div>
+                <h3 class="card-title"></h3>
+                <p class="card-meta"></p>
+            </div>
+            <button class="delete-button" type="button">删除</button>
+        </div>
+        <p class="card-preview"></p>
+    </article>
+</template>
+
+<template id="resultCardTemplate">
+    <article class="card result-card">
+        <div class="card-head">
+            <div>
+                <h3 class="card-title"></h3>
+                <p class="card-meta"></p>
+            </div>
+            <span class="score-pill"></span>
+        </div>
+        <p class="result-summary"></p>
+        <div class="chip-wrap result-tags"></div>
+        <div class="reason-list"></div>
+    </article>
+</template>
+
+<script src="./app.js"></script>
+</body>
+</html>

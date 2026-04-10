@@ -1150,6 +1150,19 @@ function startLiveRefresh() {
 function attachEvents() {
   stockSearch.addEventListener("input", renderWatchlist);
 
+  riskProfileSelect.addEventListener("change", () => {
+    state.riskProfile = riskProfileSelect.value;
+    persistRiskProfile();
+    renderRiskAssessment();
+    renderRebalanceAdvice();
+  });
+
+  rebalanceBtn.addEventListener("click", () => {
+    renderRiskAssessment();
+    renderRebalanceAdvice();
+    showToast("已更新调仓建议");
+  });
+
   watchlistBody.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
@@ -1196,6 +1209,19 @@ function attachEvents() {
     node.addEventListener("input", renderSipResult);
   });
 
+  alertForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    addAlertRule();
+  });
+
+  alertList.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    const removeId = target.dataset.removeAlert;
+    if (!removeId) return;
+    removeAlertRule(Number(removeId));
+  });
+
   refreshLiveBtn.addEventListener("click", () => {
     if (IS_FILE_PROTOCOL) {
       showToast("请先执行 npm start，再访问 http://127.0.0.1:5178");
@@ -1220,6 +1246,8 @@ function attachEvents() {
 }
 
 function init() {
+  loadUserPreferences();
+  riskProfileSelect.value = state.riskProfile;
   seedIndexHistory();
   if (IS_FILE_PROTOCOL) {
     state.liveMode = "mock";
@@ -1232,7 +1260,12 @@ function init() {
   renderFunds();
   renderNews();
   buildTradeOptions();
+  buildAlertOptions();
   renderPortfolio();
+  renderRiskAssessment();
+  renderRebalanceAdvice();
+  renderAlertRules();
+  renderTriggeredAlerts();
   renderTransactions();
   renderSipResult();
   renderSipPlans();
